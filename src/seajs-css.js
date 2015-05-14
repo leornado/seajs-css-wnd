@@ -58,9 +58,13 @@ function request(url, callback, charset) {
   currentlyAddingScript = node
 
   // ref: #185 & http://dev.jquery.com/ticket/2709
-  baseElement ?
-    head.insertBefore(node, baseElement) :
+  if (isCSS) {
     head.appendChild(node)
+  } else {
+    baseElement ?
+        head.insertBefore(node, baseElement) :
+        head.appendChild(node)
+  }
 
   currentlyAddingScript = null
 }
